@@ -1,4 +1,3 @@
-const { update } = require('../models/usuario.model');
 const Usuario = require('../models/usuario.model');
 
 module.exports = {
@@ -6,6 +5,7 @@ module.exports = {
     const user = await Usuario.find();
     res.json(user);
   },
+
   async create(req,res){
     const {nome_usuario, email_usuario, tipo_usuario, senha_usuario} = req.body;
     let data = {};
@@ -20,11 +20,13 @@ module.exports = {
       return res.status(500).json({message: 'Usuário com e-mail já existente'});
     }
   },
+
   async details(req,res){
     const {_id} = req.params;
     const user = await Usuario.findOne({_id});
     res.json(user);
   },
+
   async delete(req,res){
     const {_id} = req.params;
 
@@ -32,6 +34,7 @@ module.exports = {
 
     return res.json(user);
   },
+
   async update(req,res){
     const {_id, nome_usuario,email_usuario,senha_usuario,tipo_usuario} = req.body;
     const data = {nome_usuario,email_usuario,senha_usuario,tipo_usuario};
