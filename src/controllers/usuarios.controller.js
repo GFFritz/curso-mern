@@ -24,5 +24,12 @@ module.exports = {
     const user = await Usuario.findOne({_id});
     res.json(user);
   },
+  async delete(req,res){
+    const {_id} = req.params;
+
+    const user = await Usuario.findOneAndDelete({_id});
+
+    return res.json(user);
+  }
   
 }
