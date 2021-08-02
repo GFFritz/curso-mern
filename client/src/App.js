@@ -1,11 +1,10 @@
 import './App.css';
+import Inicio from './pages/client/painel/index';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>CURSO BASICO DE NODEJS COM REACTJS</h1>
-      </header>
+      <Inicio />
     </div>
   );
 }
