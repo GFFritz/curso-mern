@@ -1,5 +1,4 @@
 import './App.css';
-import Inicio from './pages/client/painel/index';
 import Routes from './routes';
 
 function App() {
