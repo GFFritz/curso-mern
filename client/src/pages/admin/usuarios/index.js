@@ -52,6 +52,17 @@ function UsuariosListagem() {
     loadUsuarios();
   },[])
 
+  async function handleDelete(id){
+    if (window.confirm("Deseja realmente excluir este usuário?")){
+      var result = await api.delete('/api/usuarios/'+id);
+      if (result.status === 200){
+        window.location.href = '/admin/usuarios';
+      }else{
+        alert('Ocorreu algum erro. Por favor, tente novamente!');
+      }
+    }
+  }
+
   return (
     <div className={classes.root}>
       
@@ -89,7 +100,7 @@ function UsuariosListagem() {
                               <TableCell align="right">
                                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                                   <Button color="primary">Atualizar</Button>
-                                  <Button color="secondary">Excluir</Button>
+                                  <Button color="secondary" onClick={() =>handleDelete(row._id)}>Excluir</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </TableRow>
