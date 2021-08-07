@@ -1,15 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
+import { makeStyles, CssBaseline, Typography, IconButton, Divider, Drawer, List, Toolbar, AppBar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import IconButton from '@material-ui/core/IconButton';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import Typography from '@material-ui/core/Typography';
 import { mainListItems, secondaryListItems } from './list-menu-admin';
 
 const drawerWidth = 240;
@@ -74,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MenuAdmin(){  
+function MenuAdmin({title}){  
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -87,6 +80,7 @@ function MenuAdmin(){
 
   return(
     <>
+    <CssBaseline />
     <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -99,7 +93,7 @@ function MenuAdmin(){
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            {title}
           </Typography>
           
         </Toolbar>
