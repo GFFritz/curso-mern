@@ -1,11 +1,13 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, TextField, Paper, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
+import { Box, TextField, Paper, FormControl, MenuItem, InputLabel, Select, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import Footer from '../../../components/footer-admin'
 import MenuAdmin from '../../../components/menu-admin';
+
+import api from '../../../services/api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,23 +26,47 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  fixedHeight: {
-    height: 240,
-  },
   paper: {
-    padding: theme.spacing(2),
+    padding: 35,
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
   },
   formControl: {
-    //minWidth: 120,
-    width: "100%",
+    width: '100%',
   },
 }));
 
 export default function UsuarioCadastrar() {
   const classes = useStyles();
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [tipo, setTipo] = useState('');
+
+  async function handleSubmit(){
+    const data = {
+      nome_usuario:nome,
+      email_usuario:email,
+      senha_usuario:senha,
+      tipo_usuario:tipo
+    }
+
+    if (nome !== '' && email !== '' && senha !== '' && tipo !== ''){
+      const response = await api.post('/api/usuarios', data);
+
+      if(response.status === 200){
+        window.location.href='/admin/usuarios'
+      }else{
+        alert('Erro ao cadastrar o usuário');
+      }
+    }else{
+      alert('Por Favor, preencha todos os dados');
+    }
+
+    
+  }
 
   return (
     <div className={classes.root}>
@@ -63,6 +89,8 @@ export default function UsuarioCadastrar() {
                       label="Nome Completo"
                       fullWidth
                       autoComplete="nome"
+                      value={nome}
+                      onChange={e => setNome(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -73,6 +101,8 @@ export default function UsuarioCadastrar() {
                       label="E-mail"
                       fullWidth
                       autoComplete="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
@@ -81,8 +111,8 @@ export default function UsuarioCadastrar() {
                       <Select
                       labelId="labelTipo"
                       id="tipo"
-                      //value={age}
-                      //onChange={handleChange}
+                      value={tipo}
+                      onChange={e => setTipo(e.target.value)}
                       >
                         <MenuItem value={1}>Administrador</MenuItem>
                         <MenuItem value={2}>Funcionário</MenuItem>
@@ -98,7 +128,17 @@ export default function UsuarioCadastrar() {
                       label="Senha"
                       fullWidth
                       autoComplete="senha"
+                      value={senha}
+                      onChange={e => setSenha(e.target.value)}
                     />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                  <Button 
+                  variant="contained" 
+                  color="primary"
+                  onClick={handleSubmit}>
+                    Salvar
+                  </Button>
                   </Grid>
                 </Grid>
               </Paper>
