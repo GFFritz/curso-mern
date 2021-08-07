@@ -10,7 +10,7 @@ import Produtos from './pages/admin/produtos';
 import ProdutoEditar from './pages/admin/produtos/produtos.editar';
 import ProdutoCadastrar from './pages/admin/produtos/produtos.cadastrar';
 
-import Usuarios from './pages/admin/produtos';
+import Usuarios from './pages/admin/usuarios';
 import UsuarioEditar from './pages/admin/usuarios/usuarios.editar';
 import UsuarioCadastrar from './pages/admin/usuarios/usuarios.cadastrar';
 
