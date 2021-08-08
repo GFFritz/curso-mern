@@ -99,7 +99,7 @@ function UsuariosListagem() {
                               <TableCell align="left">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                               <TableCell align="right">
                                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                                  <Button color="primary">Atualizar</Button>
+                                  <Button color="primary" href={'/admin/usuarios/editar/'+row._id}>Atualizar</Button>
                                   <Button color="secondary" onClick={() =>handleDelete(row._id)}>Excluir</Button>
                                 </ButtonGroup>
                               </TableCell>
